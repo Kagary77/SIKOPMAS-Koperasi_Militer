@@ -4,7 +4,7 @@ namespace App\Modules\Reporting;
 
 use App\Modules\ModuleServiceProvider;
 
-final class AdminServiceProvider extends ModuleServiceProvider
+final class ReportingServiceProvider extends ModuleServiceProvider
 {
     public function register(): void
     {

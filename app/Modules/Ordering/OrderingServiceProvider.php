@@ -4,7 +4,7 @@ namespace App\Modules\Ordering;
 
 use App\Modules\ModuleServiceProvider;
 
-final class AdminServiceProvider extends ModuleServiceProvider
+final class OrderingServiceProvider extends ModuleServiceProvider
 {
     public function register(): void
     {

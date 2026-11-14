@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\BelongsToKoperasi;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Sale extends Model
 {
+    use BelongsToKoperasi;
+
     protected $fillable = [
-        'koperasi_id', 'shift_id', 'invoice_number', 'total_amount', 
+        'koperasi_id', 'shift_id', 'invoice_number', 'total_amount',
         'payment_method', 'amount_paid', 'change_amount', 'status'
     ];
 
@@ -22,7 +25,18 @@ class Sale extends Model
         ];
     }
 
-    public function koperasi(): BelongsTo { return $this->belongsTo(Koperasi::class); }
-    public function shift(): BelongsTo { return $this->belongsTo(CashierShift::class); }
-    public function items(): HasMany { return $this->hasMany(SaleItem::class); }
+    public function koperasi(): BelongsTo
+    {
+        return $this->belongsTo(Koperasi::class);
+    }
+
+    public function shift(): BelongsTo
+    {
+        return $this->belongsTo(CashierShift::class, 'shift_id');
+    }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(SaleItem::class);
+    }
 }

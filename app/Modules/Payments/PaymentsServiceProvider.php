@@ -4,7 +4,7 @@ namespace App\Modules\Payments;
 
 use App\Modules\ModuleServiceProvider;
 
-final class AdminServiceProvider extends ModuleServiceProvider
+final class PaymentsServiceProvider extends ModuleServiceProvider
 {
     public function register(): void
     {

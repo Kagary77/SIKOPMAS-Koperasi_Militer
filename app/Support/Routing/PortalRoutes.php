@@ -24,9 +24,10 @@ final class PortalRoutes
      */
     public static function tenant(Closure|string $routes): void
     {
-        Route::middleware(['web', 'auth', 'verified', 'role:koperasi'])
-            ->prefix('tenant/{koperasi}')
+        Route::middleware(['web', 'auth', 'verified', 'role:koperasi', 'koperasi'])
+            ->prefix('tenant/{koperasi:slug}')
             ->name('tenant.')
+            ->scopeBindings()
             ->group($routes);
     }
 

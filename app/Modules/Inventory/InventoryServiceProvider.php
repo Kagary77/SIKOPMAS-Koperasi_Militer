@@ -4,7 +4,7 @@ namespace App\Modules\Inventory;
 
 use App\Modules\ModuleServiceProvider;
 
-final class AdminServiceProvider extends ModuleServiceProvider
+final class InventoryServiceProvider extends ModuleServiceProvider
 {
     public function register(): void
     {

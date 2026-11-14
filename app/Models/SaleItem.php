@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\BelongsToKoperasi;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SaleItem extends Model
 {
+    use BelongsToKoperasi;
+
     protected $fillable = [
-        'koperasi_id', 'sale_id', 'product_id', 
-        'product_name_snapshot', 'price_snapshot', 'qty', 'subtotal'
+        'koperasi_id', 'sale_id', 'product_id', 'product_name_snapshot',
+        'price_snapshot', 'qty', 'subtotal'
     ];
 
     protected function casts(): array
@@ -21,6 +24,18 @@ class SaleItem extends Model
         ];
     }
 
-    public function sale(): BelongsTo { return $this->belongsTo(Sale::class); }
-    public function product(): BelongsTo { return $this->belongsTo(Product::class); }
+    public function koperasi(): BelongsTo
+    {
+        return $this->belongsTo(Koperasi::class);
+    }
+
+    public function sale(): BelongsTo
+    {
+        return $this->belongsTo(Sale::class);
+    }
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class)->withTrashed();
+    }
 }

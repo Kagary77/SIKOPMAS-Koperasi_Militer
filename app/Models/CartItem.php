@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\BelongsToKoperasi;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CartItem extends Model
 {
+    use BelongsToKoperasi;
+
     protected $fillable = ['koperasi_id', 'cart_id', 'product_id', 'qty'];
 
     protected function casts(): array
@@ -14,6 +17,18 @@ class CartItem extends Model
         return ['qty' => 'integer'];
     }
 
-    public function cart(): BelongsTo { return $this->belongsTo(Cart::class); }
-    public function product(): BelongsTo { return $this->belongsTo(Product::class); }
+    public function koperasi(): BelongsTo
+    {
+        return $this->belongsTo(Koperasi::class);
+    }
+
+    public function cart(): BelongsTo
+    {
+        return $this->belongsTo(Cart::class);
+    }
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

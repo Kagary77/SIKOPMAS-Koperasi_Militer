@@ -2,24 +2,33 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\BelongsToKoperasi;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PaymentEvent extends Model
 {
-    public $timestamps = false;
-    const CREATED_AT = 'created_at';
+    use BelongsToKoperasi;
+
+    // Tabel append-only
     const UPDATED_AT = null;
 
-    protected $fillable = ['koperasi_id', 'payment_id', 'provider_event_id', 'payload'];
+    protected $fillable = [
+        'koperasi_id', 'payment_id', 'provider_event_id', 'payload'
+    ];
 
     protected function casts(): array
     {
-        return [
-            'payload' => 'array', // Otomatis encode/decode JSON
-            'created_at' => 'datetime',
-        ];
+        return ['payload' => 'array'];
     }
 
-    public function payment(): BelongsTo { return $this->belongsTo(Payment::class); }
+    public function koperasi(): BelongsTo
+    {
+        return $this->belongsTo(Koperasi::class);
+    }
+
+    public function payment(): BelongsTo
+    {
+        return $this->belongsTo(Payment::class);
+    }
 }

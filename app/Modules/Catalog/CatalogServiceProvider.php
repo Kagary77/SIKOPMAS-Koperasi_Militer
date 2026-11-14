@@ -4,7 +4,7 @@ namespace App\Modules\Catalog;
 
 use App\Modules\ModuleServiceProvider;
 
-final class AdminServiceProvider extends ModuleServiceProvider
+final class CatalogServiceProvider extends ModuleServiceProvider
 {
     public function register(): void
     {
